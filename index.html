@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html><!DOCTYPE html>
 <html lang="it">
 <head>
   <meta charset="UTF-8" />
@@ -1400,13 +1400,15 @@
           <p>Compila il modulo per richiedere informazioni, un sopralluogo o una consulenza preliminare. La richiesta potrà essere collegata a un foglio di lavoro o a una dashboard interna per visualizzare tutti gli appuntamenti ricevuti.</p>
           <div class="contact-list">
             <div class="contact-item">📍 Sede: Via Salaria 195 - 00198 - Roma (RM)</div>
+            <div class="contact-item">📩 Email: floraesco@florambiente.it</div>
             <div class="contact-item">📩 PEC: floraesco@pec.it</div>
+            <div class="contact-item">📞 Telefono: 324 863 5634</div>
             <div class="contact-item">🏢 P. IVA: 17546151006</div>
           </div>
         </div>
 
-        <form id="requestForm" action="https://formspree.io/f/INSERISCI_ID_FORM" method="POST">
-          <div class="form-note">Nota tecnica: per salvare davvero gli appuntamenti, sostituisci l'action del form con Formspree, Google Sheets, Make/Zapier o Supabase.</div>
+        <form id="requestForm">
+          <input type="hidden" name="destinatario_whatsapp" value="393248635634" />
           <div class="field-grid">
             <label>Nome e cognome
               <input name="nome" type="text" placeholder="Mario Rossi" required>
@@ -1521,7 +1523,9 @@
           <li>FLORA ESCO S.R.L.</li>
           <li>Partita IVA: 17546151006</li>
           <li>Via Salaria 195 - 00198 - Roma (RM)</li>
+          <li><a href="mailto:floraesco@florambiente.it">Email: floraesco@florambiente.it</a></li>
           <li><a href="mailto:floraesco@pec.it">PEC: floraesco@pec.it</a></li>
+          <li><a href="tel:324 863 5634">Telefono: 324 863 5634</a></li>
         </ul>
       </div>
     </div>
@@ -1551,11 +1555,45 @@
     const form = document.getElementById('requestForm');
 
     form.addEventListener('submit', function(event) {
-      const action = form.getAttribute('action');
-      if (action.includes('INSERISCI_ID_FORM')) {
-        event.preventDefault();
-        alert('Il sito è pronto. Per ricevere davvero le richieste, collega il form a Formspree, Google Sheets, Make/Zapier o Supabase sostituendo l\'action del modulo.');
+      event.preventDefault();
+
+      const formData = new FormData(form);
+      const numeroWhatsApp = String(formData.get('destinatario_whatsapp') || '').replace(/[^0-9]/g, '');
+
+      if (!numeroWhatsApp || numeroWhatsApp.includes('INSERISCI')) {
+        alert('Inserisci nel codice il numero WhatsApp destinatario, con prefisso internazionale. Esempio: 393331234567');
+        return;
       }
+
+      const nome = formData.get('nome') || '';
+      const telefono = formData.get('telefono') || '';
+      const email = formData.get('email') || '';
+      const tipoCliente = formData.get('tipo_cliente') || '';
+      const servizio = formData.get('servizio') || '';
+      const dataPreferita = formData.get('data_preferita') || '';
+      const fasciaOraria = formData.get('fascia_oraria') || '';
+      const comune = formData.get('comune') || '';
+      const messaggio = formData.get('messaggio') || '';
+
+      const testoMessaggio = [
+        'Nuova richiesta appuntamento - Flora Esco',
+        '',
+        'Nome: ' + nome,
+        'Telefono: ' + telefono,
+        'Email: ' + email,
+        'Tipo cliente: ' + tipoCliente,
+        'Servizio richiesto: ' + servizio,
+        'Data preferita: ' + dataPreferita,
+        'Fascia oraria: ' + fasciaOraria,
+        'Comune immobile: ' + comune,
+        '',
+        'Descrizione:',
+        messaggio
+      ].join('
+');
+
+      const urlWhatsApp = 'https://wa.me/' + numeroWhatsApp + '?text=' + encodeURIComponent(testoMessaggio);
+      window.open(urlWhatsApp, '_blank');
     });
   </script>
 </body>
