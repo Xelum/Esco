@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -203,11 +204,21 @@
 
     /* Icona menu rimossa: il bottone mobile usa solo testo per maggiore compatibilità. */
 
+    .menu-checkbox {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
     .mobile-panel {
       display: none;
       border-top: 1px solid var(--line);
       padding: 10px 0 18px;
-      background: rgba(246, 243, 236, 0.96);
+      background: rgba(246, 243, 236, 0.98);
+    }
+
+    #menuCheck:checked ~ .mobile-panel {
+      display: block;
     }
 
     .mobile-panel a {
@@ -961,7 +972,7 @@
         place-items: center;
       }
 
-      .mobile-panel.is-open {
+      #menuCheck:checked ~ .mobile-panel {
         display: block;
       }
 
@@ -1207,6 +1218,7 @@
 </head>
 <body>
   <header>
+    <input type="checkbox" id="menuCheck" class="menu-checkbox" aria-hidden="true">
     <div class="container nav">
       <a class="brand" href="#home" aria-label="Flora Esco Home">
         <span class="brand-mark">F</span>
@@ -1220,16 +1232,16 @@
         <a href="#faq">FAQ</a>
       </nav>
       <a class="btn btn-primary" href="#appuntamento">Richiedi appuntamento</a>
-      <button class="menu-toggle" id="menuToggle" type="button" aria-label="Apri menu" aria-expanded="false">Menu</button>
+      <label class="menu-toggle" for="menuCheck" aria-label="Apri menu">Menu</label>
     </div>
     <div class="mobile-panel" id="mobilePanel">
       <div class="container">
-        <a href="#servizi">Servizi</a>
-        <a href="#metodo">Metodo</a>
-        <a href="#professionisti">Professionisti</a>
-        <a href="#risparmio">Risparmio</a>
-        <a href="#faq">FAQ</a>
-        <a class="btn btn-primary" href="#appuntamento">Richiedi appuntamento</a>
+        <a href="#servizi" onclick="document.getElementById('menuCheck').checked=false">Servizi</a>
+        <a href="#metodo" onclick="document.getElementById('menuCheck').checked=false">Metodo</a>
+        <a href="#professionisti" onclick="document.getElementById('menuCheck').checked=false">Professionisti</a>
+        <a href="#risparmio" onclick="document.getElementById('menuCheck').checked=false">Risparmio</a>
+        <a href="#faq" onclick="document.getElementById('menuCheck').checked=false">FAQ</a>
+        <a class="btn btn-primary" href="#appuntamento" onclick="document.getElementById('menuCheck').checked=false">Richiedi appuntamento</a>
       </div>
     </div>
   </header>
@@ -1562,19 +1574,7 @@
       }
 
       if (menuToggle && mobilePanel) {
-        menuToggle.onclick = function() {
-          const isOpen = mobilePanel.classList.toggle('is-open');
-          menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-          menuToggle.textContent = isOpen ? 'Chiudi' : 'Menu';
-        };
-
-        mobilePanel.querySelectorAll('a').forEach(function(link) {
-          link.onclick = function() {
-            mobilePanel.classList.remove('is-open');
-            menuToggle.setAttribute('aria-expanded', 'false');
-            menuToggle.textContent = 'Menu';
-          };
-        });
+        /* Il menu mobile è gestito con HTML/CSS tramite checkbox, senza JavaScript. */
       }
 
       function apriWhatsApp() {
