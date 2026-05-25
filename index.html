@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -186,16 +185,44 @@
 
     .menu-toggle {
       display: none;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
       border: 1px solid var(--line);
       background: #fff;
-      width: 46px;
+      min-width: 96px;
       height: 46px;
-      border-radius: 15px;
+      padding: 0 14px;
+      border-radius: 999px;
       cursor: pointer;
       color: var(--green);
-      font-size: 1.35rem;
+      font-size: 0.9rem;
       font-weight: 900;
+      box-shadow: 0 8px 24px rgba(8, 31, 23, 0.06);
     }
+
+    .menu-icon {
+      width: 18px;
+      height: 12px;
+      position: relative;
+      display: inline-block;
+    }
+
+    .menu-icon::before,
+    .menu-icon::after,
+    .menu-icon span {
+      content: "";
+      position: absolute;
+      left: 0;
+      width: 18px;
+      height: 2px;
+      border-radius: 999px;
+      background: var(--green);
+    }
+
+    .menu-icon::before { top: 0; }
+    .menu-icon span { top: 5px; }
+    .menu-icon::after { bottom: 0; }
 
     .mobile-panel {
       display: none;
@@ -206,10 +233,11 @@
 
     .mobile-panel a {
       display: block;
-      padding: 13px 0;
-      font-weight: 800;
+      padding: 15px 0;
+      font-weight: 900;
       color: var(--green);
       border-bottom: 1px solid rgba(16, 28, 23, 0.08);
+      font-size: 1.02rem;
     }
 
     .mobile-panel .btn {
@@ -793,7 +821,7 @@
 
     .field-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
       gap: 14px;
     }
 
@@ -807,6 +835,8 @@
 
     input, select, textarea {
       width: 100%;
+      max-width: 100%;
+      min-width: 0;
       border: 1px solid rgba(16, 28, 23, 0.16);
       background: #fbfbfa;
       border-radius: 16px;
@@ -816,6 +846,13 @@
       outline: none;
       transition: border 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
       min-height: 50px;
+    }
+
+    input[type="date"] {
+      appearance: none;
+      -webkit-appearance: none;
+      min-width: 0;
+      max-width: 100%;
     }
 
     input:focus, select:focus, textarea:focus {
@@ -1188,14 +1225,14 @@
         <a href="#faq">FAQ</a>
       </nav>
       <a class="btn btn-primary" href="#appuntamento">Richiedi appuntamento</a>
-      <button class="menu-toggle" id="menuToggle" aria-label="Apri menu" aria-expanded="false">☰</button>
+      <button class="menu-toggle" id="menuToggle" type="button" aria-label="Apri menu" aria-expanded="false"><span class="menu-icon"><span></span></span>Menu</button>
     </div>
     <div class="mobile-panel" id="mobilePanel">
       <div class="container">
         <a href="#servizi">Servizi</a>
         <a href="#metodo">Metodo</a>
         <a href="#professionisti">Professionisti</a>
-        <a href="#risparmio">Risparmio energetico</a>
+        <a href="#risparmio">Risparmio</a>
         <a href="#faq">FAQ</a>
         <a class="btn btn-primary" href="#appuntamento">Richiedi appuntamento</a>
       </div>
@@ -1520,66 +1557,67 @@
   <script>
     const menuToggle = document.getElementById('menuToggle');
     const mobilePanel = document.getElementById('mobilePanel');
-
-    menuToggle.addEventListener('click', function() {
-      const isOpen = mobilePanel.classList.toggle('is-open');
-      menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-      menuToggle.textContent = isOpen ? '×' : '☰';
-    });
-
-    mobilePanel.querySelectorAll('a').forEach(function(link) {
-      link.addEventListener('click', function() {
-        mobilePanel.classList.remove('is-open');
-        menuToggle.setAttribute('aria-expanded', 'false');
-        menuToggle.textContent = '☰';
-      });
-    });
-
-    document.getElementById('year').textContent = new Date().getFullYear();
-
     const form = document.getElementById('requestForm');
 
-    form.addEventListener('submit', function(event) {
-      event.preventDefault();
+    if (menuToggle && mobilePanel) {
+      menuToggle.addEventListener('click', function() {
+        const isOpen = mobilePanel.classList.toggle('is-open');
+        menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        menuToggle.innerHTML = isOpen ? 'Chiudi' : '<span class="menu-icon"><span></span></span>Menu';
+      });
 
-      const formData = new FormData(form);
-      const numeroWhatsApp = String(formData.get('destinatario_whatsapp') || '').replace(/[^0-9]/g, '');
+      mobilePanel.querySelectorAll('a').forEach(function(link) {
+        link.addEventListener('click', function() {
+          mobilePanel.classList.remove('is-open');
+          menuToggle.setAttribute('aria-expanded', 'false');
+          menuToggle.innerHTML = '<span class="menu-icon"><span></span></span>Menu';
+        });
+      });
+    }
 
-      if (!numeroWhatsApp || numeroWhatsApp.includes('INSERISCI')) {
-        alert('Inserisci nel codice il numero WhatsApp destinatario, con prefisso internazionale. Esempio: 393331234567');
-        return;
-      }
+    const yearElement = document.getElementById('year');
+    if (yearElement) {
+      yearElement.textContent = new Date().getFullYear();
+    }
 
-      const nome = formData.get('nome') || '';
-      const telefono = formData.get('telefono') || '';
-      const email = formData.get('email') || '';
-      const tipoCliente = formData.get('tipo_cliente') || '';
-      const servizio = formData.get('servizio') || '';
-      const dataPreferita = formData.get('data_preferita') || '';
-      const fasciaOraria = formData.get('fascia_oraria') || '';
-      const indirizzoImmobile = formData.get('indirizzo_immobile') || '';
-      const messaggio = formData.get('messaggio') || '';
+    if (form) {
+      form.addEventListener('submit', function(event) {
+        event.preventDefault();
 
-      const testoMessaggio = [
-        'Nuova richiesta appuntamento - Flora Esco',
-        '',
-        'Nome: ' + nome,
-        'Telefono: ' + telefono,
-        'Email: ' + email,
-        'Tipo cliente: ' + tipoCliente,
-        'Servizio richiesto: ' + servizio,
-        'Data preferita: ' + dataPreferita,
-        'Fascia oraria: ' + fasciaOraria,
-        'Indirizzo preciso immobile: ' + indirizzoImmobile,
-        '',
-        'Descrizione:',
-        messaggio
-      ].join('
+        const formData = new FormData(form);
+        const numeroWhatsApp = '393248635634';
+
+        const nome = formData.get('nome') || '';
+        const telefono = formData.get('telefono') || '';
+        const email = formData.get('email') || '';
+        const tipoCliente = formData.get('tipo_cliente') || '';
+        const servizio = formData.get('servizio') || '';
+        const dataPreferita = formData.get('data_preferita') || '';
+        const fasciaOraria = formData.get('fascia_oraria') || '';
+        const indirizzoImmobile = formData.get('indirizzo_immobile') || '';
+        const messaggio = formData.get('messaggio') || '';
+
+        const testoMessaggio = [
+          'Nuova richiesta appuntamento - Flora Esco',
+          '',
+          'Nome: ' + nome,
+          'Telefono: ' + telefono,
+          'Email: ' + email,
+          'Tipo cliente: ' + tipoCliente,
+          'Servizio richiesto: ' + servizio,
+          'Data preferita: ' + dataPreferita,
+          'Fascia oraria: ' + fasciaOraria,
+          'Indirizzo preciso immobile: ' + indirizzoImmobile,
+          '',
+          'Descrizione:',
+          messaggio
+        ].join('
 ');
 
-      const urlWhatsApp = 'https://wa.me/' + numeroWhatsApp + '?text=' + encodeURIComponent(testoMessaggio);
-      window.open(urlWhatsApp, '_blank');
-    });
+        const urlWhatsApp = 'https://wa.me/' + numeroWhatsApp + '?text=' + encodeURIComponent(testoMessaggio);
+        window.location.href = urlWhatsApp;
+      });
+    }
   </script>
 </body>
 </html>
