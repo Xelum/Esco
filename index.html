@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -1435,7 +1434,7 @@
           </div>
         </div>
 
-        <form id="requestForm">
+        <form id="requestForm" onsubmit="inviaRichiestaWhatsApp(event)">
           <input type="hidden" name="destinatario_whatsapp" value="393248635634" />
           <div class="field-grid">
             <label>Nome e cognome
@@ -1495,7 +1494,7 @@
             <input type="checkbox" required>
             <span>Confermo di aver letto l'informativa privacy e autorizzo il trattamento dei dati per essere ricontattato in merito alla richiesta.</span>
           </label>
-          <button class="btn btn-primary" type="button" id="whatsappSubmit">Invia richiesta</button>
+          <button class="btn btn-primary" type="submit">Invia richiesta su WhatsApp</button>
         </form>
       </div>
     </section>
@@ -1562,75 +1561,56 @@
   </footer>
 
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const menuToggle = document.getElementById('menuToggle');
-      const mobilePanel = document.getElementById('mobilePanel');
-      const form = document.getElementById('requestForm');
-      const whatsappSubmit = document.getElementById('whatsappSubmit');
-      const yearElement = document.getElementById('year');
+    function inviaRichiestaWhatsApp(event) {
+      event.preventDefault();
 
+      const form = document.getElementById('requestForm');
+      if (!form) return false;
+
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return false;
+      }
+
+      const numeroWhatsApp = '393248635634';
+      const formData = new FormData(form);
+
+      const nome = formData.get('nome') || '';
+      const telefono = formData.get('telefono') || '';
+      const email = formData.get('email') || '';
+      const tipoCliente = formData.get('tipo_cliente') || '';
+      const servizio = formData.get('servizio') || '';
+      const dataPreferita = formData.get('data_preferita') || '';
+      const fasciaOraria = formData.get('fascia_oraria') || '';
+      const indirizzoImmobile = formData.get('indirizzo_immobile') || '';
+      const messaggio = formData.get('messaggio') || '';
+
+      const testoMessaggio = [
+        'Nuova richiesta appuntamento - Flora Esco',
+        '',
+        'Nome: ' + nome,
+        'Telefono: ' + telefono,
+        'Email: ' + email,
+        'Tipo cliente: ' + tipoCliente,
+        'Servizio richiesto: ' + servizio,
+        'Data preferita: ' + dataPreferita,
+        'Fascia oraria: ' + fasciaOraria,
+        'Indirizzo preciso immobile: ' + indirizzoImmobile,
+        '',
+        'Descrizione:',
+        messaggio
+      ].join('\n');
+
+      const linkWhatsApp = 'https://wa.me/' + numeroWhatsApp + '?text=' + encodeURIComponent(testoMessaggio);
+      window.location.href = linkWhatsApp;
+
+      return false;
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const yearElement = document.getElementById('year');
       if (yearElement) {
         yearElement.textContent = new Date().getFullYear();
-      }
-
-      if (menuToggle && mobilePanel) {
-        /* Il menu mobile è gestito con HTML/CSS tramite checkbox, senza JavaScript. */
-      }
-
-      function apriWhatsApp() {
-        if (!form) return;
-
-        if (!form.checkValidity()) {
-          form.reportValidity();
-          return;
-        }
-
-        const formData = new FormData(form);
-        const numeroWhatsApp = '393248635634';
-
-        const nome = formData.get('nome') || '';
-        const telefono = formData.get('telefono') || '';
-        const email = formData.get('email') || '';
-        const tipoCliente = formData.get('tipo_cliente') || '';
-        const servizio = formData.get('servizio') || '';
-        const dataPreferita = formData.get('data_preferita') || '';
-        const fasciaOraria = formData.get('fascia_oraria') || '';
-        const indirizzoImmobile = formData.get('indirizzo_immobile') || '';
-        const messaggio = formData.get('messaggio') || '';
-
-        const testoMessaggio = [
-          'Nuova richiesta appuntamento - Flora Esco',
-          '',
-          'Nome: ' + nome,
-          'Telefono: ' + telefono,
-          'Email: ' + email,
-          'Tipo cliente: ' + tipoCliente,
-          'Servizio richiesto: ' + servizio,
-          'Data preferita: ' + dataPreferita,
-          'Fascia oraria: ' + fasciaOraria,
-          'Indirizzo preciso immobile: ' + indirizzoImmobile,
-          '',
-          'Descrizione:',
-          messaggio
-        ].join('
-');
-
-        const urlWhatsApp = 'https://api.whatsapp.com/send?phone=' + numeroWhatsApp + '&text=' + encodeURIComponent(testoMessaggio);
-        window.location.assign(urlWhatsApp);
-      }
-
-      if (form) {
-        form.addEventListener('submit', function(event) {
-          event.preventDefault();
-          apriWhatsApp();
-        });
-      }
-
-      if (whatsappSubmit) {
-        whatsappSubmit.addEventListener('click', function(event) {
-          event.preventDefault();
-          apriWhatsApp();
-        });
       }
     });
   </script>
