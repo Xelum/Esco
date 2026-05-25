@@ -1,4 +1,5 @@
-<!DOCTYPE html><!DOCTYPE html>
+
+<!DOCTYPE html>
 <html lang="it">
 <head>
   <meta charset="UTF-8" />
@@ -1184,7 +1185,6 @@
         <a href="#metodo">Metodo</a>
         <a href="#professionisti">Professionisti</a>
         <a href="#risparmio">Risparmio</a>
-        <a href="#societa">Società</a>
         <a href="#faq">FAQ</a>
       </nav>
       <a class="btn btn-primary" href="#appuntamento">Richiedi appuntamento</a>
@@ -1196,7 +1196,6 @@
         <a href="#metodo">Metodo</a>
         <a href="#professionisti">Professionisti</a>
         <a href="#risparmio">Risparmio energetico</a>
-        <a href="#societa">Dati societari</a>
         <a href="#faq">FAQ</a>
         <a class="btn btn-primary" href="#appuntamento">Richiedi appuntamento</a>
       </div>
@@ -1377,21 +1376,6 @@
       </div>
     </section>
 
-    <section id="societa">
-      <div class="container">
-        <div class="section-head">
-          <h2>Una società tecnica strutturata.</h2>
-          <p>I dati societari rendono il sito più istituzionale e aumentano la fiducia del cliente che desidera affidare una richiesta tecnica o progettuale.</p>
-        </div>
-        <div class="company-panel">
-          <div class="company-data"><span>Ragione sociale</span><strong>FLORA ESCO S.R.L.</strong></div>
-          <div class="company-data"><span>Partita IVA</span><strong>17546151006</strong></div>
-          <div class="company-data"><span>Sede</span><strong>VIA SALARIA 195 - 00198 - ROMA (RM)</strong></div>
-          <div class="company-data"><span>PEC</span><strong>floraesco@pec.it</strong></div>
-        </div>
-      </div>
-    </section>
-
     <section id="appuntamento">
       <div class="container form-section">
         <div class="form-copy">
@@ -1441,6 +1425,7 @@
                 <option>Progettazione edile</option>
                 <option>Ristrutturazione o intervento civile</option>
                 <option>Consulenza risparmio energetico</option>
+                <option>Altro</option>
               </select>
             </label>
             <label>Data preferita
@@ -1455,8 +1440,8 @@
                 <option>Indifferente</option>
               </select>
             </label>
-            <label>Comune dell'immobile
-              <input name="comune" type="text" placeholder="Es. Roma, Viterbo, Civitavecchia">
+            <label>Indirizzo preciso immobile
+              <input name="indirizzo_immobile" type="text" placeholder="Es. Via, numero civico, comune e provincia">
             </label>
           </div>
           <label>Descrizione della richiesta
@@ -1572,7 +1557,7 @@
       const servizio = formData.get('servizio') || '';
       const dataPreferita = formData.get('data_preferita') || '';
       const fasciaOraria = formData.get('fascia_oraria') || '';
-      const comune = formData.get('comune') || '';
+      const indirizzoImmobile = formData.get('indirizzo_immobile') || '';
       const messaggio = formData.get('messaggio') || '';
 
       const testoMessaggio = [
@@ -1585,7 +1570,7 @@
         'Servizio richiesto: ' + servizio,
         'Data preferita: ' + dataPreferita,
         'Fascia oraria: ' + fasciaOraria,
-        'Comune immobile: ' + comune,
+        'Indirizzo preciso immobile: ' + indirizzoImmobile,
         '',
         'Descrizione:',
         messaggio
