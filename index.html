@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -1434,22 +1435,22 @@
           </div>
         </div>
 
-        <form id="requestForm" onsubmit="inviaRichiestaWhatsApp(event)">
+        <form id="requestForm">
           <input type="hidden" name="destinatario_whatsapp" value="393248635634" />
           <div class="field-grid">
             <label>Nome e cognome
-              <input name="nome" type="text" placeholder="Mario Rossi" required>
+              <input id="nome" name="nome" type="text" placeholder="Mario Rossi" required>
             </label>
             <label>Telefono
-              <input name="telefono" type="tel" placeholder="+39 ..." required>
+              <input id="telefono" name="telefono" type="tel" placeholder="+39 ..." required>
             </label>
           </div>
           <div class="field-grid">
             <label>Email
-              <input name="email" type="email" placeholder="nome@email.it" required>
+              <input id="email" name="email" type="email" placeholder="nome@email.it" required>
             </label>
             <label>Tipo cliente
-              <select name="tipo_cliente" required>
+              <select id="tipo_cliente" name="tipo_cliente" required>
                 <option value="">Seleziona</option>
                 <option>Privato</option>
                 <option>Azienda</option>
@@ -1460,7 +1461,7 @@
           </div>
           <div class="field-grid">
             <label>Servizio richiesto
-              <select name="servizio" required>
+              <select id="servizio" name="servizio" required>
                 <option value="">Seleziona</option>
                 <option>Progettazione impianto fotovoltaico</option>
                 <option>Fotovoltaico con accumulo</option>
@@ -1472,23 +1473,23 @@
               </select>
             </label>
             <label>Data preferita
-              <input name="data_preferita" type="date">
+              <input id="data_preferita" name="data_preferita" type="date">
             </label>
           </div>
           <div class="field-grid">
             <label>Fascia oraria preferita
-              <select name="fascia_oraria">
+              <select id="fascia_oraria" name="fascia_oraria">
                 <option>Mattina</option>
                 <option>Pomeriggio</option>
                 <option>Indifferente</option>
               </select>
             </label>
             <label>Indirizzo preciso immobile
-              <input name="indirizzo_immobile" type="text" placeholder="Es. Via, numero civico, comune e provincia">
+              <input id="indirizzo_immobile" name="indirizzo_immobile" type="text" placeholder="Es. Via, numero civico, comune e provincia">
             </label>
           </div>
           <label>Descrizione della richiesta
-            <textarea name="messaggio" placeholder="Descrivi brevemente il progetto, la superficie disponibile, il tipo di immobile, eventuali consumi o esigenze specifiche..."></textarea>
+            <textarea id="messaggio" name="messaggio" placeholder="Descrivi brevemente il progetto, la superficie disponibile, il tipo di immobile, eventuali consumi o esigenze specifiche..."></textarea>
           </label>
           <label class="privacy">
             <input type="checkbox" required>
@@ -1561,58 +1562,47 @@
   </footer>
 
   <script>
-    function inviaRichiestaWhatsApp(event) {
-      event.preventDefault();
+    const form = document.getElementById("requestForm");
 
-      const form = document.getElementById('requestForm');
-      if (!form) return false;
+    if (form) {
+      form.addEventListener("submit", function(event) {
+        event.preventDefault();
 
-      if (!form.checkValidity()) {
-        form.reportValidity();
-        return false;
-      }
+        const nome = document.getElementById("nome").value;
+        const telefono = document.getElementById("telefono").value;
+        const email = document.getElementById("email").value;
+        const tipoCliente = document.getElementById("tipo_cliente").value;
+        const servizio = document.getElementById("servizio").value;
+        const dataPreferita = document.getElementById("data_preferita").value;
+        const fasciaOraria = document.getElementById("fascia_oraria").value;
+        const indirizzoImmobile = document.getElementById("indirizzo_immobile").value;
+        const messaggioCliente = document.getElementById("messaggio").value;
 
-      const numeroWhatsApp = '393248635634';
-      const formData = new FormData(form);
+        const numeroWhatsApp = "393248635634";
 
-      const nome = formData.get('nome') || '';
-      const telefono = formData.get('telefono') || '';
-      const email = formData.get('email') || '';
-      const tipoCliente = formData.get('tipo_cliente') || '';
-      const servizio = formData.get('servizio') || '';
-      const dataPreferita = formData.get('data_preferita') || '';
-      const fasciaOraria = formData.get('fascia_oraria') || '';
-      const indirizzoImmobile = formData.get('indirizzo_immobile') || '';
-      const messaggio = formData.get('messaggio') || '';
+        const messaggio =
+          "Ciao Flora Esco! Vorrei richiedere un appuntamento.%0A%0A" +
+          "Nome: " + encodeURIComponent(nome) + "%0A" +
+          "Telefono: " + encodeURIComponent(telefono) + "%0A" +
+          "Email: " + encodeURIComponent(email) + "%0A" +
+          "Tipo cliente: " + encodeURIComponent(tipoCliente) + "%0A" +
+          "Servizio richiesto: " + encodeURIComponent(servizio) + "%0A" +
+          "Data preferita: " + encodeURIComponent(dataPreferita) + "%0A" +
+          "Fascia oraria: " + encodeURIComponent(fasciaOraria) + "%0A" +
+          "Indirizzo preciso immobile: " + encodeURIComponent(indirizzoImmobile) + "%0A%0A" +
+          "Descrizione richiesta:%0A" + encodeURIComponent(messaggioCliente) + "%0A%0A" +
+          "Attendo un vostro riscontro, grazie!";
 
-      const testoMessaggio = [
-        'Nuova richiesta appuntamento - Flora Esco',
-        '',
-        'Nome: ' + nome,
-        'Telefono: ' + telefono,
-        'Email: ' + email,
-        'Tipo cliente: ' + tipoCliente,
-        'Servizio richiesto: ' + servizio,
-        'Data preferita: ' + dataPreferita,
-        'Fascia oraria: ' + fasciaOraria,
-        'Indirizzo preciso immobile: ' + indirizzoImmobile,
-        '',
-        'Descrizione:',
-        messaggio
-      ].join('\n');
+        const url = "https://wa.me/" + numeroWhatsApp + "?text=" + messaggio;
 
-      const linkWhatsApp = 'https://wa.me/' + numeroWhatsApp + '?text=' + encodeURIComponent(testoMessaggio);
-      window.location.href = linkWhatsApp;
-
-      return false;
+        window.open(url, "_blank");
+      });
     }
 
-    document.addEventListener('DOMContentLoaded', function() {
-      const yearElement = document.getElementById('year');
-      if (yearElement) {
-        yearElement.textContent = new Date().getFullYear();
-      }
-    });
+    const yearElement = document.getElementById("year");
+    if (yearElement) {
+      yearElement.textContent = new Date().getFullYear();
+    }
   </script>
 </body>
 </html>
