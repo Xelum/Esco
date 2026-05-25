@@ -866,6 +866,15 @@
       resize: vertical;
     }
 
+    select {
+      appearance: auto;
+      -webkit-appearance: menulist;
+      cursor: pointer;
+      background-color: #fbfbfa;
+      position: relative;
+      z-index: 2;
+    }
+
     .privacy {
       display: flex;
       gap: 10px;
@@ -1488,7 +1497,7 @@
             <input type="checkbox" required>
             <span>Confermo di aver letto l'informativa privacy e autorizzo il trattamento dei dati per essere ricontattato in merito alla richiesta.</span>
           </label>
-          <button class="btn btn-primary" type="submit">Invia richiesta</button>
+          <button class="btn btn-primary" type="button" id="whatsappSubmit">Invia richiesta</button>
         </form>
       </div>
     </section>
@@ -1555,34 +1564,40 @@
   </footer>
 
   <script>
-    const menuToggle = document.getElementById('menuToggle');
-    const mobilePanel = document.getElementById('mobilePanel');
-    const form = document.getElementById('requestForm');
+    document.addEventListener('DOMContentLoaded', function() {
+      const menuToggle = document.getElementById('menuToggle');
+      const mobilePanel = document.getElementById('mobilePanel');
+      const form = document.getElementById('requestForm');
+      const whatsappSubmit = document.getElementById('whatsappSubmit');
+      const yearElement = document.getElementById('year');
 
-    if (menuToggle && mobilePanel) {
-      menuToggle.addEventListener('click', function() {
-        const isOpen = mobilePanel.classList.toggle('is-open');
-        menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-        menuToggle.innerHTML = isOpen ? 'Chiudi' : '<span class="menu-icon"><span></span></span>Menu';
-      });
+      if (yearElement) {
+        yearElement.textContent = new Date().getFullYear();
+      }
 
-      mobilePanel.querySelectorAll('a').forEach(function(link) {
-        link.addEventListener('click', function() {
-          mobilePanel.classList.remove('is-open');
-          menuToggle.setAttribute('aria-expanded', 'false');
-          menuToggle.innerHTML = '<span class="menu-icon"><span></span></span>Menu';
+      if (menuToggle && mobilePanel) {
+        menuToggle.addEventListener('click', function() {
+          const isOpen = mobilePanel.classList.toggle('is-open');
+          menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+          menuToggle.innerHTML = isOpen ? 'Chiudi' : '<span class="menu-icon"><span></span></span>Menu';
         });
-      });
-    }
 
-    const yearElement = document.getElementById('year');
-    if (yearElement) {
-      yearElement.textContent = new Date().getFullYear();
-    }
+        mobilePanel.querySelectorAll('a').forEach(function(link) {
+          link.addEventListener('click', function() {
+            mobilePanel.classList.remove('is-open');
+            menuToggle.setAttribute('aria-expanded', 'false');
+            menuToggle.innerHTML = '<span class="menu-icon"><span></span></span>Menu';
+          });
+        });
+      }
 
-    if (form) {
-      form.addEventListener('submit', function(event) {
-        event.preventDefault();
+      function apriWhatsApp() {
+        if (!form) return;
+
+        if (!form.checkValidity()) {
+          form.reportValidity();
+          return;
+        }
 
         const formData = new FormData(form);
         const numeroWhatsApp = '393248635634';
@@ -1611,13 +1626,26 @@
           '',
           'Descrizione:',
           messaggio
-        ].join('
-');
+        ].join('\n');
 
-        const urlWhatsApp = 'https://wa.me/' + numeroWhatsApp + '?text=' + encodeURIComponent(testoMessaggio);
-        window.location.href = urlWhatsApp;
-      });
-    }
+        const urlWhatsApp = 'https://api.whatsapp.com/send?phone=' + numeroWhatsApp + '&text=' + encodeURIComponent(testoMessaggio);
+        window.location.assign(urlWhatsApp);
+      }
+
+      if (form) {
+        form.addEventListener('submit', function(event) {
+          event.preventDefault();
+          apriWhatsApp();
+        });
+      }
+
+      if (whatsappSubmit) {
+        whatsappSubmit.addEventListener('click', function(event) {
+          event.preventDefault();
+          apriWhatsApp();
+        });
+      }
+    });
   </script>
 </body>
 </html>
