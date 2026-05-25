@@ -201,28 +201,7 @@
       box-shadow: 0 8px 24px rgba(8, 31, 23, 0.06);
     }
 
-    .menu-icon {
-      width: 18px;
-      height: 12px;
-      position: relative;
-      display: inline-block;
-    }
-
-    .menu-icon::before,
-    .menu-icon::after,
-    .menu-icon span {
-      content: "";
-      position: absolute;
-      left: 0;
-      width: 18px;
-      height: 2px;
-      border-radius: 999px;
-      background: var(--green);
-    }
-
-    .menu-icon::before { top: 0; }
-    .menu-icon span { top: 5px; }
-    .menu-icon::after { bottom: 0; }
+    /* Icona menu rimossa: il bottone mobile usa solo testo per maggiore compatibilità. */
 
     .mobile-panel {
       display: none;
@@ -1583,18 +1562,18 @@
       }
 
       if (menuToggle && mobilePanel) {
-        menuToggle.addEventListener('click', function() {
+        menuToggle.onclick = function() {
           const isOpen = mobilePanel.classList.toggle('is-open');
           menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
           menuToggle.textContent = isOpen ? 'Chiudi' : 'Menu';
-        });
+        };
 
         mobilePanel.querySelectorAll('a').forEach(function(link) {
-          link.addEventListener('click', function() {
+          link.onclick = function() {
             mobilePanel.classList.remove('is-open');
             menuToggle.setAttribute('aria-expanded', 'false');
             menuToggle.textContent = 'Menu';
-          });
+          };
         });
       }
 
@@ -1657,4 +1636,3 @@
   </script>
 </body>
 </html>
-
