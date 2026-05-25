@@ -4,22 +4,28 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Flora Esco | Ingegneria, Fotovoltaico ed Efficienza Energetica</title>
-  <meta name="description" content="Flora Esco accompagna privati, imprese e condomini nella progettazione di impianti fotovoltaici, interventi edili, efficientamento energetico e consulenza tecnica." />
+  <meta name="description" content="Flora Esco S.r.l. accompagna privati, imprese e condomini nella progettazione di impianti fotovoltaici, interventi edili, efficientamento energetico e consulenza tecnica." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #f7f5ef;
+      --bg: #f6f3ec;
       --paper: #ffffff;
-      --ink: #17211d;
-      --muted: #5f6d66;
-      --green: #134e3a;
-      --green-2: #0f3f30;
+      --paper-soft: #fbfaf7;
+      --ink: #101c17;
+      --muted: #66756d;
+      --green: #113f31;
+      --green-2: #0b2f25;
+      --green-3: #1d6a4f;
       --gold: #b8924a;
-      --line: rgba(23, 33, 29, 0.12);
-      --shadow: 0 24px 70px rgba(12, 33, 25, 0.14);
-      --radius: 24px;
+      --gold-soft: #eadbc0;
+      --line: rgba(16, 28, 23, 0.12);
+      --line-strong: rgba(16, 28, 23, 0.18);
+      --shadow: 0 28px 80px rgba(8, 31, 23, 0.15);
+      --shadow-soft: 0 16px 48px rgba(8, 31, 23, 0.08);
+      --radius: 26px;
+      --max: 1180px;
     }
 
     * {
@@ -30,13 +36,18 @@
 
     html {
       scroll-behavior: smooth;
+      scroll-padding-top: 92px;
     }
 
     body {
       font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: var(--bg);
+      background:
+        radial-gradient(circle at top right, rgba(184, 146, 74, 0.18), transparent 34rem),
+        radial-gradient(circle at top left, rgba(17, 63, 49, 0.08), transparent 28rem),
+        var(--bg);
       color: var(--ink);
       line-height: 1.6;
+      overflow-x: hidden;
     }
 
     a {
@@ -44,17 +55,22 @@
       text-decoration: none;
     }
 
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
     .container {
-      width: min(1180px, calc(100% - 40px));
+      width: min(var(--max), calc(100% - 42px));
       margin: 0 auto;
     }
 
     header {
       position: sticky;
       top: 0;
-      z-index: 50;
-      background: rgba(247, 245, 239, 0.86);
-      backdrop-filter: blur(16px);
+      z-index: 100;
+      background: rgba(246, 243, 236, 0.88);
+      backdrop-filter: blur(18px);
       border-bottom: 1px solid var(--line);
     }
 
@@ -63,59 +79,63 @@
       align-items: center;
       justify-content: space-between;
       min-height: 78px;
-      gap: 24px;
+      gap: 20px;
     }
 
     .brand {
       display: flex;
       align-items: center;
       gap: 12px;
-      font-weight: 800;
-      letter-spacing: -0.04em;
+      font-weight: 900;
+      letter-spacing: -0.045em;
       font-size: 1.25rem;
+      min-width: max-content;
     }
 
     .brand-mark {
-      width: 42px;
-      height: 42px;
-      border-radius: 14px;
-      background: linear-gradient(135deg, var(--green), #267153);
+      width: 44px;
+      height: 44px;
+      border-radius: 15px;
+      background: linear-gradient(135deg, var(--green), var(--green-3));
       color: #fff;
       display: grid;
       place-items: center;
-      box-shadow: 0 12px 30px rgba(19, 78, 58, 0.25);
+      box-shadow: 0 14px 34px rgba(17, 63, 49, 0.28);
       position: relative;
       overflow: hidden;
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: 1.45rem;
     }
 
     .brand-mark::after {
       content: "";
       position: absolute;
-      width: 22px;
+      width: 26px;
       height: 2px;
       background: var(--gold);
       transform: rotate(-35deg);
       bottom: 12px;
-      right: 7px;
+      right: 6px;
+      border-radius: 999px;
     }
 
     .brand small {
       display: block;
-      font-size: 0.68rem;
+      font-size: 0.67rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--muted);
-      margin-top: -3px;
-      font-weight: 700;
+      margin-top: -4px;
+      font-weight: 800;
     }
 
     .nav-links {
       display: flex;
       align-items: center;
       gap: 22px;
-      font-size: 0.92rem;
+      font-size: 0.91rem;
       color: #31443b;
-      font-weight: 600;
+      font-weight: 700;
     }
 
     .nav-links a {
@@ -132,13 +152,15 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
+      gap: 8px;
       border: 0;
       border-radius: 999px;
       padding: 13px 22px;
-      font-weight: 800;
+      font-weight: 900;
       cursor: pointer;
-      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, border 0.2s ease;
       font-size: 0.92rem;
+      white-space: nowrap;
     }
 
     .btn:hover {
@@ -148,7 +170,7 @@
     .btn-primary {
       background: var(--green);
       color: #fff;
-      box-shadow: 0 18px 38px rgba(19, 78, 58, 0.23);
+      box-shadow: 0 18px 42px rgba(17, 63, 49, 0.24);
     }
 
     .btn-primary:hover {
@@ -156,26 +178,49 @@
     }
 
     .btn-ghost {
-      border: 1px solid var(--line);
-      background: rgba(255, 255, 255, 0.65);
+      border: 1px solid var(--line-strong);
+      background: rgba(255, 255, 255, 0.72);
       color: var(--green);
     }
 
-    .hero {
-      padding: 84px 0 56px;
-      position: relative;
-      overflow: hidden;
+    .menu-toggle {
+      display: none;
+      border: 1px solid var(--line);
+      background: #fff;
+      width: 46px;
+      height: 46px;
+      border-radius: 15px;
+      cursor: pointer;
+      color: var(--green);
+      font-size: 1.35rem;
+      font-weight: 900;
     }
 
-    .hero::before {
-      content: "";
-      position: absolute;
-      width: 520px;
-      height: 520px;
-      border-radius: 50%;
-      background: rgba(184, 146, 74, 0.16);
-      top: -240px;
-      right: -160px;
+    .mobile-panel {
+      display: none;
+      border-top: 1px solid var(--line);
+      padding: 10px 0 18px;
+      background: rgba(246, 243, 236, 0.96);
+    }
+
+    .mobile-panel a {
+      display: block;
+      padding: 13px 0;
+      font-weight: 800;
+      color: var(--green);
+      border-bottom: 1px solid rgba(16, 28, 23, 0.08);
+    }
+
+    .mobile-panel .btn {
+      display: flex;
+      margin-top: 12px;
+      width: 100%;
+    }
+
+    .hero {
+      padding: 86px 0 58px;
+      position: relative;
+      overflow: hidden;
     }
 
     .hero-grid {
@@ -192,12 +237,12 @@
       gap: 9px;
       padding: 8px 13px;
       border-radius: 999px;
-      background: rgba(19, 78, 58, 0.08);
+      background: rgba(17, 63, 49, 0.08);
       color: var(--green);
-      font-weight: 800;
-      font-size: 0.78rem;
+      font-weight: 900;
+      font-size: 0.76rem;
       text-transform: uppercase;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.105em;
       margin-bottom: 22px;
     }
 
@@ -217,15 +262,15 @@
     }
 
     h1 {
-      font-size: clamp(3.1rem, 7vw, 5.8rem);
-      max-width: 760px;
+      font-size: clamp(3.05rem, 7vw, 5.9rem);
+      max-width: 780px;
       margin-bottom: 24px;
     }
 
     .lead {
-      font-size: clamp(1.06rem, 2vw, 1.24rem);
+      font-size: clamp(1.06rem, 2vw, 1.23rem);
       color: var(--muted);
-      max-width: 680px;
+      max-width: 690px;
       margin-bottom: 32px;
     }
 
@@ -234,39 +279,41 @@
       flex-wrap: wrap;
       gap: 14px;
       align-items: center;
-      margin-bottom: 38px;
+      margin-bottom: 36px;
     }
 
     .trust-row {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 14px;
-      max-width: 650px;
+      max-width: 680px;
     }
 
     .trust-card {
       border: 1px solid var(--line);
-      background: rgba(255, 255, 255, 0.65);
-      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.72);
+      border-radius: 20px;
       padding: 18px;
+      box-shadow: 0 10px 28px rgba(8, 31, 23, 0.04);
     }
 
     .trust-card strong {
       display: block;
-      font-size: 1.25rem;
+      font-size: 1.27rem;
       color: var(--green);
+      line-height: 1.1;
     }
 
     .trust-card span {
       color: var(--muted);
       font-size: 0.88rem;
-      font-weight: 600;
+      font-weight: 700;
     }
 
     .hero-panel {
       background: #10281f;
       color: #fff;
-      border-radius: 34px;
+      border-radius: 36px;
       min-height: 610px;
       padding: 28px;
       box-shadow: var(--shadow);
@@ -275,6 +322,7 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      isolation: isolate;
     }
 
     .hero-panel::before {
@@ -282,14 +330,20 @@
       position: absolute;
       inset: 0;
       background:
-        linear-gradient(180deg, rgba(16, 40, 31, 0.2), rgba(16, 40, 31, 0.92)),
+        linear-gradient(180deg, rgba(16, 40, 31, 0.08), rgba(16, 40, 31, 0.95)),
         url("https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=1400&q=80") center/cover;
-      opacity: 0.95;
+      opacity: 0.96;
+      z-index: -2;
     }
 
-    .hero-panel > * {
-      position: relative;
-      z-index: 1;
+    .hero-panel::after {
+      content: "";
+      position: absolute;
+      inset: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 28px;
+      z-index: -1;
+      pointer-events: none;
     }
 
     .panel-top {
@@ -309,37 +363,38 @@
     }
 
     .status-card span {
-      color: rgba(255, 255, 255, 0.72);
+      color: rgba(255, 255, 255, 0.76);
       font-size: 0.82rem;
-      font-weight: 600;
+      font-weight: 650;
     }
 
     .status-card strong {
       display: block;
       font-size: 1.65rem;
       margin-top: 4px;
+      line-height: 1;
     }
 
     .panel-bottom {
-      background: rgba(255, 255, 255, 0.12);
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      backdrop-filter: blur(12px);
+      background: rgba(255, 255, 255, 0.13);
+      border: 1px solid rgba(255, 255, 255, 0.19);
+      backdrop-filter: blur(14px);
       border-radius: 26px;
       padding: 24px;
     }
 
     .panel-bottom h3 {
       color: #fff;
-      font-size: 1.65rem;
+      font-size: 1.68rem;
       margin-bottom: 10px;
     }
 
     .panel-bottom p {
-      color: rgba(255, 255, 255, 0.78);
+      color: rgba(255, 255, 255, 0.8);
     }
 
     section {
-      padding: 74px 0;
+      padding: 76px 0;
     }
 
     .section-head {
@@ -347,17 +402,17 @@
       justify-content: space-between;
       align-items: end;
       gap: 28px;
-      margin-bottom: 34px;
+      margin-bottom: 36px;
     }
 
     .section-head h2 {
-      font-size: clamp(2.2rem, 4vw, 3.7rem);
-      max-width: 680px;
+      font-size: clamp(2.15rem, 4vw, 3.7rem);
+      max-width: 710px;
     }
 
     .section-head p {
       color: var(--muted);
-      max-width: 500px;
+      max-width: 520px;
       font-size: 1.02rem;
     }
 
@@ -368,33 +423,46 @@
     }
 
     .card {
-      background: var(--paper);
+      background: rgba(255, 255, 255, 0.82);
       border: 1px solid var(--line);
       border-radius: var(--radius);
       padding: 28px;
-      box-shadow: 0 12px 36px rgba(12, 33, 25, 0.06);
+      box-shadow: var(--shadow-soft);
       transition: transform 0.2s ease, box-shadow 0.2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::after {
+      content: "";
+      position: absolute;
+      left: 28px;
+      right: 28px;
+      top: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--green), var(--gold));
+      border-radius: 999px;
     }
 
     .card:hover {
       transform: translateY(-5px);
-      box-shadow: 0 24px 55px rgba(12, 33, 25, 0.1);
+      box-shadow: 0 26px 58px rgba(8, 31, 23, 0.12);
     }
 
     .icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 16px;
+      width: 50px;
+      height: 50px;
+      border-radius: 17px;
       display: grid;
       place-items: center;
-      background: rgba(19, 78, 58, 0.09);
+      background: rgba(17, 63, 49, 0.09);
       color: var(--green);
-      font-size: 1.4rem;
+      font-size: 1.42rem;
       margin-bottom: 22px;
     }
 
     .card h3 {
-      font-size: 1.55rem;
+      font-size: 1.56rem;
       margin-bottom: 13px;
     }
 
@@ -431,9 +499,11 @@
     }
 
     .dark-box {
-      background: var(--green);
+      background:
+        linear-gradient(145deg, rgba(17, 63, 49, 0.98), rgba(8, 40, 30, 0.98)),
+        radial-gradient(circle at top right, rgba(184, 146, 74, 0.25), transparent 18rem);
       color: #fff;
-      border-radius: 34px;
+      border-radius: 36px;
       padding: 42px;
       min-height: 480px;
       display: flex;
@@ -441,6 +511,7 @@
       justify-content: space-between;
       position: relative;
       overflow: hidden;
+      box-shadow: var(--shadow);
     }
 
     .dark-box::after {
@@ -449,19 +520,19 @@
       width: 340px;
       height: 340px;
       border-radius: 50%;
-      border: 1px solid rgba(255, 255, 255, 0.14);
+      border: 1px solid rgba(255, 255, 255, 0.13);
       right: -120px;
       top: -90px;
     }
 
     .dark-box h2 {
       color: #fff;
-      font-size: clamp(2.1rem, 4vw, 3.2rem);
+      font-size: clamp(2.08rem, 4vw, 3.22rem);
       margin-bottom: 18px;
     }
 
     .dark-box p {
-      color: rgba(255, 255, 255, 0.76);
+      color: rgba(255, 255, 255, 0.78);
       font-size: 1.04rem;
     }
 
@@ -474,10 +545,11 @@
       display: grid;
       grid-template-columns: 54px 1fr;
       gap: 18px;
-      background: rgba(255, 255, 255, 0.7);
+      background: rgba(255, 255, 255, 0.76);
       border: 1px solid var(--line);
-      border-radius: 22px;
+      border-radius: 23px;
       padding: 22px;
+      box-shadow: 0 12px 34px rgba(8, 31, 23, 0.05);
     }
 
     .step-num {
@@ -504,52 +576,126 @@
 
     .professionals {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 22px;
     }
 
     .pro-card {
       background: #fff;
-      border-radius: 26px;
+      border-radius: 30px;
       overflow: hidden;
       border: 1px solid var(--line);
-      box-shadow: 0 16px 44px rgba(12, 33, 25, 0.06);
+      box-shadow: var(--shadow-soft);
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      min-height: 330px;
     }
 
     .pro-photo {
-      height: 230px;
-      background: linear-gradient(135deg, rgba(19, 78, 58, 0.9), rgba(184, 146, 74, 0.5)), url("https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=900&q=80") center/cover;
+      min-height: 330px;
+      background:
+        linear-gradient(135deg, rgba(17, 63, 49, 0.78), rgba(184, 146, 74, 0.45)),
+        url("Alessandra.png") center/cover,
+        linear-gradient(135deg, #143f31, #d8c194);
+      position: relative;
     }
 
     .pro-card:nth-child(2) .pro-photo {
-      background-image: linear-gradient(135deg, rgba(19, 78, 58, 0.9), rgba(184, 146, 74, 0.5)), url("https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?auto=format&fit=crop&w=900&q=80");
+      background:
+        linear-gradient(135deg, rgba(17, 63, 49, 0.78), rgba(184, 146, 74, 0.45)),
+        url("Emanuele.png") center/cover,
+        linear-gradient(135deg, #143f31, #d8c194);
     }
 
-    .pro-card:nth-child(3) .pro-photo {
-      background-image: linear-gradient(135deg, rgba(19, 78, 58, 0.9), rgba(184, 146, 74, 0.5)), url("https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&w=900&q=80");
+    .pro-photo::after {
+      content: "Foto in arrivo";
+      position: absolute;
+      left: 18px;
+      bottom: 18px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.85);
+      color: var(--green);
+      font-weight: 900;
+      font-size: 0.78rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
     }
 
     .pro-content {
-      padding: 24px;
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
 
     .pro-content h3 {
-      font-size: 1.45rem;
-      margin-bottom: 6px;
+      font-size: 1.76rem;
+      margin-bottom: 8px;
+    }
+
+    .person-name {
+      font-family: "Inter", sans-serif;
+      font-size: 1.08rem;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      margin-bottom: 12px;
     }
 
     .role {
       display: inline-block;
       color: var(--green);
-      font-weight: 800;
-      font-size: 0.83rem;
+      font-weight: 900;
+      font-size: 0.8rem;
       text-transform: uppercase;
-      letter-spacing: 0.09em;
+      letter-spacing: 0.1em;
       margin-bottom: 12px;
+    }
+
+    .qualification {
+      display: inline-flex;
+      width: fit-content;
+      margin-bottom: 14px;
+      padding: 9px 12px;
+      border-radius: 999px;
+      background: rgba(184, 146, 74, 0.16);
+      color: #725623;
+      font-size: 0.84rem;
+      font-weight: 850;
     }
 
     .pro-content p {
       color: var(--muted);
+    }
+
+    .company-panel {
+      margin-top: 22px;
+      background: rgba(255, 255, 255, 0.78);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      padding: 26px;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap: 16px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .company-data span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      font-weight: 900;
+      margin-bottom: 5px;
+    }
+
+    .company-data strong {
+      display: block;
+      color: var(--ink);
+      font-size: 0.96rem;
+      word-break: break-word;
     }
 
     .tips {
@@ -560,9 +706,10 @@
 
     .tip {
       border: 1px solid var(--line);
-      background: rgba(255, 255, 255, 0.72);
-      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.76);
+      border-radius: 23px;
       padding: 22px;
+      box-shadow: 0 12px 34px rgba(8, 31, 23, 0.04);
     }
 
     .tip strong {
@@ -578,24 +725,42 @@
     }
 
     .form-section {
-      background: #10281f;
+      background:
+        linear-gradient(145deg, rgba(16, 40, 31, 0.98), rgba(8, 31, 23, 0.98)),
+        radial-gradient(circle at top left, rgba(184, 146, 74, 0.2), transparent 22rem);
       color: #fff;
-      border-radius: 42px;
+      border-radius: 44px;
       padding: 48px;
       display: grid;
       grid-template-columns: 0.85fr 1.15fr;
       gap: 44px;
       box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .form-section::before {
+      content: "";
+      position: absolute;
+      inset: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.11);
+      border-radius: 34px;
+      pointer-events: none;
+    }
+
+    .form-section > * {
+      position: relative;
+      z-index: 1;
     }
 
     .form-copy h2 {
       color: #fff;
-      font-size: clamp(2.3rem, 4vw, 3.6rem);
+      font-size: clamp(2.26rem, 4vw, 3.62rem);
       margin-bottom: 18px;
     }
 
     .form-copy p {
-      color: rgba(255, 255, 255, 0.74);
+      color: rgba(255, 255, 255, 0.76);
       margin-bottom: 20px;
     }
 
@@ -610,8 +775,9 @@
       border-radius: 18px;
       background: rgba(255, 255, 255, 0.08);
       border: 1px solid rgba(255, 255, 255, 0.14);
-      color: rgba(255, 255, 255, 0.84);
-      font-weight: 600;
+      color: rgba(255, 255, 255, 0.86);
+      font-weight: 700;
+      word-break: break-word;
     }
 
     form {
@@ -621,6 +787,7 @@
       padding: 28px;
       display: grid;
       gap: 16px;
+      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.18);
     }
 
     .field-grid {
@@ -633,29 +800,31 @@
       display: grid;
       gap: 8px;
       color: #2f4039;
-      font-weight: 800;
+      font-weight: 900;
       font-size: 0.9rem;
     }
 
     input, select, textarea {
       width: 100%;
-      border: 1px solid rgba(23, 33, 29, 0.16);
-      background: #fafafa;
+      border: 1px solid rgba(16, 28, 23, 0.16);
+      background: #fbfbfa;
       border-radius: 16px;
-      padding: 14px 14px;
+      padding: 15px 14px;
       font: inherit;
       color: var(--ink);
       outline: none;
-      transition: border 0.2s ease, box-shadow 0.2s ease;
+      transition: border 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+      min-height: 50px;
     }
 
     input:focus, select:focus, textarea:focus {
       border-color: var(--green);
-      box-shadow: 0 0 0 4px rgba(19, 78, 58, 0.1);
+      box-shadow: 0 0 0 4px rgba(17, 63, 49, 0.1);
+      background: #fff;
     }
 
     textarea {
-      min-height: 120px;
+      min-height: 126px;
       resize: vertical;
     }
 
@@ -665,21 +834,22 @@
       align-items: flex-start;
       font-size: 0.82rem;
       color: var(--muted);
-      font-weight: 500;
+      font-weight: 600;
     }
 
     .privacy input {
       width: auto;
+      min-height: auto;
       margin-top: 4px;
     }
 
     .form-note {
-      background: rgba(19, 78, 58, 0.08);
+      background: rgba(17, 63, 49, 0.08);
       color: var(--green);
       border-radius: 16px;
       padding: 13px;
       font-size: 0.86rem;
-      font-weight: 700;
+      font-weight: 800;
     }
 
     .faq {
@@ -688,10 +858,11 @@
     }
 
     details {
-      background: #fff;
+      background: rgba(255, 255, 255, 0.8);
       border: 1px solid var(--line);
-      border-radius: 20px;
+      border-radius: 21px;
       padding: 20px 22px;
+      box-shadow: 0 10px 30px rgba(8, 31, 23, 0.04);
     }
 
     summary {
@@ -707,21 +878,21 @@
     }
 
     footer {
-      padding: 50px 0;
+      padding: 54px 0;
       background: #0d2019;
       color: #fff;
-      margin-top: 70px;
+      margin-top: 72px;
     }
 
     .footer-grid {
       display: grid;
-      grid-template-columns: 1.1fr 0.9fr 0.9fr;
-      gap: 28px;
+      grid-template-columns: 1.1fr 0.85fr 1.05fr;
+      gap: 30px;
       align-items: start;
     }
 
-    footer p, footer a {
-      color: rgba(255, 255, 255, 0.7);
+    footer p, footer a, footer li {
+      color: rgba(255, 255, 255, 0.72);
     }
 
     footer h3 {
@@ -729,24 +900,36 @@
       font-family: "Inter", sans-serif;
       letter-spacing: -0.02em;
       margin-bottom: 14px;
+      font-size: 1rem;
     }
 
     .footer-links {
       display: grid;
       gap: 8px;
+      list-style: none;
     }
 
-    .mobile-menu {
-      display: none;
+    .legal-line {
+      margin-top: 30px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      color: rgba(255, 255, 255, 0.58);
+      font-size: 0.88rem;
     }
 
-    @media (max-width: 950px) {
-      .nav-links {
+    @media (max-width: 1040px) {
+      .nav-links,
+      .nav > .btn-primary {
         display: none;
       }
 
-      .mobile-menu {
-        display: inline-flex;
+      .menu-toggle {
+        display: grid;
+        place-items: center;
+      }
+
+      .mobile-panel.is-open {
+        display: block;
       }
 
       .hero-grid,
@@ -756,13 +939,24 @@
         grid-template-columns: 1fr;
       }
 
+      .hero {
+        padding-top: 62px;
+      }
+
       .hero-panel {
         min-height: 500px;
       }
 
       .cards,
-      .professionals,
       .tips {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .professionals {
+        grid-template-columns: 1fr;
+      }
+
+      .company-panel {
         grid-template-columns: 1fr 1fr;
       }
 
@@ -775,36 +969,205 @@
       }
     }
 
-    @media (max-width: 640px) {
+    @media (max-width: 720px) {
+      html {
+        scroll-padding-top: 78px;
+      }
+
       .container {
-        width: min(100% - 26px, 1180px);
+        width: min(100% - 28px, var(--max));
+      }
+
+      .nav {
+        min-height: 68px;
+      }
+
+      .brand {
+        font-size: 1.08rem;
+        gap: 10px;
+      }
+
+      .brand-mark {
+        width: 40px;
+        height: 40px;
+        border-radius: 14px;
+      }
+
+      .brand small {
+        font-size: 0.58rem;
+      }
+
+      section {
+        padding: 54px 0;
       }
 
       .hero {
-        padding-top: 54px;
+        padding: 48px 0 38px;
+      }
+
+      h1 {
+        font-size: clamp(2.58rem, 12vw, 4.1rem);
+        margin-bottom: 18px;
+      }
+
+      .lead {
+        font-size: 1.02rem;
+        margin-bottom: 24px;
+      }
+
+      .hero-actions {
+        display: grid;
+        grid-template-columns: 1fr;
+        margin-bottom: 24px;
+      }
+
+      .btn {
+        width: 100%;
+        min-height: 50px;
       }
 
       .trust-row,
       .cards,
-      .professionals,
       .tips,
-      .field-grid {
+      .field-grid,
+      .company-panel {
         grid-template-columns: 1fr;
       }
 
-      .form-section,
-      .dark-box {
-        padding: 28px;
-        border-radius: 28px;
+      .trust-card {
+        padding: 16px;
       }
 
       .hero-panel {
-        border-radius: 28px;
-        min-height: 460px;
+        border-radius: 30px;
+        min-height: 470px;
+        padding: 20px;
+      }
+
+      .hero-panel::after {
+        inset: 12px;
+        border-radius: 22px;
+      }
+
+      .panel-top {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
       }
 
       .status-card {
-        width: 170px;
+        width: auto;
+        padding: 14px;
+        border-radius: 18px;
+      }
+
+      .status-card strong {
+        font-size: 1.34rem;
+      }
+
+      .status-card span {
+        font-size: 0.76rem;
+      }
+
+      .panel-bottom {
+        padding: 20px;
+      }
+
+      .panel-bottom h3 {
+        font-size: 1.45rem;
+      }
+
+      .section-head h2 {
+        font-size: clamp(2.02rem, 10vw, 3rem);
+      }
+
+      .card,
+      .tip,
+      .step,
+      details {
+        border-radius: 22px;
+      }
+
+      .dark-box,
+      .form-section {
+        padding: 26px;
+        border-radius: 30px;
+      }
+
+      .dark-box {
+        min-height: 390px;
+      }
+
+      .step {
+        grid-template-columns: 46px 1fr;
+        gap: 14px;
+        padding: 18px;
+      }
+
+      .step-num {
+        width: 46px;
+        height: 46px;
+        border-radius: 15px;
+      }
+
+      .pro-card {
+        grid-template-columns: 1fr;
+        min-height: 0;
+      }
+
+      .pro-photo {
+        min-height: 260px;
+      }
+
+      .pro-content {
+        padding: 24px;
+      }
+
+      .pro-content h3 {
+        font-size: 1.52rem;
+      }
+
+      form {
+        padding: 20px;
+        border-radius: 24px;
+      }
+
+      input, select, textarea {
+        font-size: 16px;
+      }
+
+      .contact-list {
+        margin-top: 18px;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .container {
+        width: min(100% - 22px, var(--max));
+      }
+
+      .brand small {
+        display: none;
+      }
+
+      .hero-panel {
+        min-height: 430px;
+      }
+
+      .panel-top {
+        grid-template-columns: 1fr;
+      }
+
+      .status-card {
+        display: none;
+      }
+
+      .status-card:first-child {
+        display: block;
+      }
+
+      .form-section::before {
+        display: none;
       }
     }
   </style>
@@ -820,10 +1183,23 @@
         <a href="#servizi">Servizi</a>
         <a href="#metodo">Metodo</a>
         <a href="#professionisti">Professionisti</a>
-        <a href="#risparmio">Risparmio energetico</a>
+        <a href="#risparmio">Risparmio</a>
+        <a href="#societa">Società</a>
         <a href="#faq">FAQ</a>
       </nav>
       <a class="btn btn-primary" href="#appuntamento">Richiedi appuntamento</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Apri menu" aria-expanded="false">☰</button>
+    </div>
+    <div class="mobile-panel" id="mobilePanel">
+      <div class="container">
+        <a href="#servizi">Servizi</a>
+        <a href="#metodo">Metodo</a>
+        <a href="#professionisti">Professionisti</a>
+        <a href="#risparmio">Risparmio energetico</a>
+        <a href="#societa">Dati societari</a>
+        <a href="#faq">FAQ</a>
+        <a class="btn btn-primary" href="#appuntamento">Richiedi appuntamento</a>
+      </div>
     </div>
   </header>
 
@@ -833,7 +1209,7 @@
         <div>
           <span class="eyebrow">Studio tecnico per energia ed edilizia</span>
           <h1>Progettiamo il tuo futuro energetico e costruttivo.</h1>
-          <p class="lead">Flora Esco supporta privati, imprese e condomini nella progettazione di impianti fotovoltaici, interventi edili, efficientamento energetico e consulenza tecnica con approccio ingegneristico, serio e misurabile.</p>
+          <p class="lead">Flora Esco S.r.l. supporta privati, imprese e condomini nella progettazione di impianti fotovoltaici, interventi edili, efficientamento energetico e consulenza tecnica con metodo ingegneristico, documentazione chiara e visione operativa.</p>
           <div class="hero-actions">
             <a class="btn btn-primary" href="#appuntamento">Prenota una consulenza</a>
             <a class="btn btn-ghost" href="#servizi">Scopri i servizi</a>
@@ -855,7 +1231,7 @@
             <div class="status-card">
               <span>Area tecnica</span>
               <strong>ED</strong>
-              <span>Edilizia, pratiche, verifiche e progettazione civile.</span>
+              <span>Edilizia, verifiche e progettazione civile.</span>
             </div>
           </div>
           <div class="panel-bottom">
@@ -888,7 +1264,7 @@
           <article class="card">
             <div class="icon">⌂</div>
             <h3>Progettazione edile</h3>
-            <p>Consulenza tecnica per interventi edilizi, ristrutturazioni, verifiche preliminari e soluzioni progettuali coordinate dall'ingegnere civile.</p>
+            <p>Consulenza tecnica per interventi edilizi, ristrutturazioni, verifiche preliminari e soluzioni progettuali coordinate da professionisti qualificati.</p>
             <ul>
               <li>Valutazione interventi e fattibilità</li>
               <li>Supporto tecnico e progettuale</li>
@@ -916,7 +1292,7 @@
           <div>
             <span class="eyebrow" style="background: rgba(255,255,255,0.12); color: #fff;">Il nostro metodo</span>
             <h2>Dati, progetto, cantiere: ogni fase ha una logica.</h2>
-            <p>Un sito professionale deve comunicare fiducia. Per questo Flora Esco presenta un percorso chiaro, con appuntamenti tracciati e richieste ordinate.</p>
+            <p>Flora Esco lavora con un percorso chiaro: richiesta ordinata, verifica tecnica, appuntamento, sopralluogo e proposta. Questo permette di ridurre improvvisazioni e dare al cliente risposte comprensibili.</p>
           </div>
           <a class="btn btn-ghost" style="background: #fff; border: 0; color: var(--green); width: fit-content;" href="#appuntamento">Avvia la tua richiesta</a>
         </div>
@@ -958,31 +1334,28 @@
       <div class="container">
         <div class="section-head">
           <h2>I nostri professionisti.</h2>
-          <p>Competenze tecniche coordinate per offrire al cliente una consulenza completa: energia, edilizia, pratiche e gestione operativa.</p>
+          <p>Competenze tecniche coordinate per offrire al cliente una consulenza completa: energia, edilizia, verifiche, documentazione e gestione operativa.</p>
         </div>
         <div class="professionals">
           <article class="pro-card">
-            <div class="pro-photo"></div>
+            <div class="pro-photo" aria-label="Foto Ing. Alessandra Carlucci"></div>
             <div class="pro-content">
-              <span class="role">Direzione tecnica</span>
+              <span class="role">Direzione Tecnica</span>
               <h3>Responsabile progetto</h3>
+              <div class="person-name">Ing. Alessandra Carlucci</div>
+              <div class="qualification">Ingegnere Civile ed Ambientale con qualifica da EGE civile</div>
               <p>Coordina la richiesta del cliente, organizza sopralluoghi, raccoglie la documentazione e segue lo sviluppo della proposta.</p>
             </div>
           </article>
+
           <article class="pro-card">
-            <div class="pro-photo"></div>
+            <div class="pro-photo" aria-label="Foto Dott. Emanuele Tretta"></div>
             <div class="pro-content">
-              <span class="role">Ingegneria civile</span>
-              <h3>Ingegnere civile</h3>
-              <p>Analizza gli aspetti edilizi e strutturali, valuta la fattibilità degli interventi e supporta la progettazione tecnica.</p>
-            </div>
-          </article>
-          <article class="pro-card">
-            <div class="pro-photo"></div>
-            <div class="pro-content">
-              <span class="role">Energia e impianti</span>
-              <h3>Consulente energetico</h3>
-              <p>Studia consumi, autoconsumo, dimensionamento fotovoltaico, accumulo e opportunità di risparmio energetico.</p>
+              <span class="role">Area tecnica e impiantistica</span>
+              <h3>Perito Industriale</h3>
+              <div class="person-name">Dott. Emanuele Tretta</div>
+              <div class="qualification">Supporto tecnico, operativo e documentale</div>
+              <p>Segue la raccolta delle informazioni tecniche, il coordinamento operativo delle richieste e il supporto nella gestione dei progetti energetici ed edilizi.</p>
             </div>
           </article>
         </div>
@@ -1004,21 +1377,36 @@
       </div>
     </section>
 
+    <section id="societa">
+      <div class="container">
+        <div class="section-head">
+          <h2>Una società tecnica strutturata.</h2>
+          <p>I dati societari rendono il sito più istituzionale e aumentano la fiducia del cliente che desidera affidare una richiesta tecnica o progettuale.</p>
+        </div>
+        <div class="company-panel">
+          <div class="company-data"><span>Ragione sociale</span><strong>FLORA ESCO S.R.L.</strong></div>
+          <div class="company-data"><span>Partita IVA</span><strong>17546151006</strong></div>
+          <div class="company-data"><span>Sede</span><strong>VIA SALARIA 195 - 00198 - ROMA (RM)</strong></div>
+          <div class="company-data"><span>PEC</span><strong>floraesco@pec.it</strong></div>
+        </div>
+      </div>
+    </section>
+
     <section id="appuntamento">
       <div class="container form-section">
         <div class="form-copy">
           <span class="eyebrow" style="background: rgba(255,255,255,0.12); color: #fff;">Richiesta appuntamento</span>
           <h2>Parlaci del tuo progetto.</h2>
-          <p>Compila il modulo per richiedere informazioni, un sopralluogo o una consulenza preliminare. La richiesta potrà essere collegata a un foglio di lavoro o a una dashboard interna per vedere tutti gli appuntamenti ricevuti.</p>
+          <p>Compila il modulo per richiedere informazioni, un sopralluogo o una consulenza preliminare. La richiesta potrà essere collegata a un foglio di lavoro o a una dashboard interna per visualizzare tutti gli appuntamenti ricevuti.</p>
           <div class="contact-list">
-            <div class="contact-item">📍 Area operativa: privati, imprese e condomini</div>
-            <div class="contact-item">📩 Email: info@floraesco.it</div>
-            <div class="contact-item">☎ Telefono: inserire numero aziendale</div>
+            <div class="contact-item">📍 Sede: Via Salaria 195 - 00198 - Roma (RM)</div>
+            <div class="contact-item">📩 PEC: floraesco@pec.it</div>
+            <div class="contact-item">🏢 P. IVA: 17546151006</div>
           </div>
         </div>
 
         <form id="requestForm" action="https://formspree.io/f/INSERISCI_ID_FORM" method="POST">
-          <div class="form-note">Nota tecnica: per salvare davvero gli appuntamenti, sostituisci l'action del form con Formspree, Google Forms, Make/Zapier o Supabase.</div>
+          <div class="form-note">Nota tecnica: per salvare davvero gli appuntamenti, sostituisci l'action del form con Formspree, Google Sheets, Make/Zapier o Supabase.</div>
           <div class="field-grid">
             <label>Nome e cognome
               <input name="nome" type="text" placeholder="Mario Rossi" required>
@@ -1112,33 +1500,54 @@
   <footer>
     <div class="container footer-grid">
       <div>
-        <div class="brand" style="margin-bottom: 16px;">
+        <div class="brand" style="margin-bottom: 16px; color: #fff;">
           <span class="brand-mark">F</span>
-          <span>Flora Esco<small>Engineering & Energy</small></span>
+          <span>Flora Esco<small style="color: rgba(255,255,255,0.58);">Engineering & Energy</small></span>
         </div>
         <p>Studio tecnico per progettazione fotovoltaica, consulenza energetica e progettazione edile. Un approccio integrato per immobili più efficienti, sicuri e valorizzati.</p>
       </div>
       <div>
         <h3>Servizi</h3>
-        <div class="footer-links">
-          <a href="#servizi">Fotovoltaico</a>
-          <a href="#servizi">Progettazione edile</a>
-          <a href="#risparmio">Efficienza energetica</a>
-          <a href="#appuntamento">Richiesta appuntamento</a>
-        </div>
+        <ul class="footer-links">
+          <li><a href="#servizi">Fotovoltaico</a></li>
+          <li><a href="#servizi">Progettazione edile</a></li>
+          <li><a href="#risparmio">Efficienza energetica</a></li>
+          <li><a href="#appuntamento">Richiesta appuntamento</a></li>
+        </ul>
       </div>
       <div>
-        <h3>Contatti</h3>
-        <div class="footer-links">
-          <a href="mailto:info@floraesco.it">info@floraesco.it</a>
-          <a href="tel:+390000000000">+39 000 000 0000</a>
-          <a href="#appuntamento">Prenota una consulenza</a>
-        </div>
+        <h3>Dati societari</h3>
+        <ul class="footer-links">
+          <li>FLORA ESCO S.R.L.</li>
+          <li>Partita IVA: 17546151006</li>
+          <li>Via Salaria 195 - 00198 - Roma (RM)</li>
+          <li><a href="mailto:floraesco@pec.it">PEC: floraesco@pec.it</a></li>
+        </ul>
       </div>
     </div>
+    <div class="container legal-line">© <span id="year"></span> FLORA ESCO S.R.L. - Tutti i diritti riservati.</div>
   </footer>
 
   <script>
+    const menuToggle = document.getElementById('menuToggle');
+    const mobilePanel = document.getElementById('mobilePanel');
+
+    menuToggle.addEventListener('click', function() {
+      const isOpen = mobilePanel.classList.toggle('is-open');
+      menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      menuToggle.textContent = isOpen ? '×' : '☰';
+    });
+
+    mobilePanel.querySelectorAll('a').forEach(function(link) {
+      link.addEventListener('click', function() {
+        mobilePanel.classList.remove('is-open');
+        menuToggle.setAttribute('aria-expanded', 'false');
+        menuToggle.textContent = '☰';
+      });
+    });
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+
     const form = document.getElementById('requestForm');
 
     form.addEventListener('submit', function(event) {
